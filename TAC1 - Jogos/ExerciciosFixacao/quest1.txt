@@ -1,0 +1,18 @@
+a) False, nil em Lua é tido como um false.
+b) True, em Lua apenas nil e false são considerados false
+c) True, em Lua apenas nil e false são considerados false
+d) false, pois o para metro do if é o valor boolean false  
+e) number, function e “hello world!”. Pois é atribuido o valor 1, um number em lua, 
+na variável “a”, logo após é atribuido a função print, que é do tipo function em lua, e 
+por fim é utilizado a variável “a” como print, pois foi atribuido a função print a ela.
+f)nil, pois a variável “a” não foi inicializada e o valor padrão para variáveis não inicializadas
+é nil; nil, pois é atribuido o nil a variável “a”; nil, pois é printado o tipo da variável “a”, 
+que é nil.
+g)nil, i não foi inicializada; 10, pois todas as variáveis sem o modificador local são globais 
+em Lua; 10, na função g a variável i é local, então ela não modifica a variável global i e 
+descartada após a execução da função.
+h)10, a variável “a” foi inicializada e atribuido o valor 10 a ela; 10, pois a variável na função
+f é local e não modifica a variável global a"
+
+
+

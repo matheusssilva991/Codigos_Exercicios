@@ -1,0 +1,4 @@
+Placa: 101     Quilometragem: 57.50 Quantidade de Combustivel 30.00  Media Quilometro/Combustivel: 1.92
+Placa: 102     Quilometragem: 77.00 Quantidade de Combustivel 40.00  Media Quilometro/Combustivel: 1.92
+Placa: 103     Quilometragem: 23.70 Quantidade de Combustivel 14.00  Media Quilometro/Combustivel: 1.69
+Placa: 104     Quilometragem: 80.00 Quantidade de Combustivel 30.00  Media Quilometro/Combustivel: 2.67

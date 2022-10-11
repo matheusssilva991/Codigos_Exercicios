@@ -1,0 +1,18 @@
+1    matheus      10.00
+2     Monday      20.00
+3      sexta      40.00
+4    domingo       0.00
+5       joao     -50.00
+6       igor    -120.00
+7     wesley     -70.00
+8  Bolsonaro    -250.00
+9    Tuesday       0.00
+10     BouloS      70.00
+11 Gasparzinho       0.00
+13     afonso       0.00
+15 figurante3       0.00
+14 figurante1       0.00
+16 figurante4       0.00
+17 figurante5       0.00
+1     wesley    -600.00
+2 igor caloteiro    8000.00

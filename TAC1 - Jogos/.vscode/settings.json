@@ -1,0 +1,15 @@
+{
+    "Lua.diagnostics.globals": [
+        "odd_interval_while",
+        "odd_interval_for",
+        "odd_interval_repeat"
+    ],
+    "Lua.diagnostics.disable": [
+        "lowercase-global"
+    ],
+    "Lua.runtime.version": "LuaJIT",
+    "Lua.workspace.library": [
+        "${3rd}/love2d/library"
+    ],
+    "Lua.workspace.checkThirdParty": false
+}
