@@ -18,15 +18,15 @@ end
 
 function Roda:update(dt)
     if #self.pratos > 0 then
-        for i, _ in pairs(self.pratos) do
+        for i=#self.pratos, 1, -1 do
             self.pratos[i].angulo = self.pratos[i].angulo + self.vel * dt
-    
+        
             self.pratos[i].posicao.x =  math.cos(math.rad(self.pratos[i].angulo)) * (self.raio - 25)
             self.pratos[i].posicao.y =  math.sin(math.rad(self.pratos[i].angulo)) * (self.raio - 25)
-    
+        
             self.pratos[i].posicao = self.pratos[i].posicao + self.posicao_roda 
         end
-    end
+    end    
 end
 
 function Roda:draw()
@@ -34,8 +34,8 @@ function Roda:draw()
     love.graphics.circle("line", self.posicao_roda.x, self.posicao_roda.y, self.raio - 50)
 
     love.graphics.setColor(0, 1, 0)
-    if #self.pratos > 0 then
-        for i, _ in pairs(self.pratos) do
+    for i=#self.pratos, 1, -1 do
+        if self.pratos[i] ~= nil then
             love.graphics.circle("fill", self.pratos[i].posicao.x, self.pratos[i].posicao.y, self.pratos[i].raio)
         end
     end
