@@ -1,0 +1,1 @@
+Para os varejista também é necessário guardar as notas fiscais geradas por eles. As notas fiscais terão o cliente, a data da venda, a descrição do pagamento, os itens constituintes e o varejista que gerou a nota fiscal. Para os clientes será necessário guarda o nome, cpf, o endereco e o telefone. 

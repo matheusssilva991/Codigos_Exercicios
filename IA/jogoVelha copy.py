@@ -55,7 +55,7 @@ def faz_jogada(jogador_atual):
                 aux, tabuleiro[linha][coluna] = tabuleiro[linha][coluna], marcador
         
                 v = minimax(tabuleiro, marcador_contra)
-                
+                print(v)
                 if v > pontuacao:
                     pontuacao = v
                     jogada = jogada_teste
@@ -103,7 +103,7 @@ def minimax(tabuleiro, marcador):
         aux, tabuleiro[linha][coluna] = tabuleiro[linha][coluna], marcador
         
         if marcador == "O":
-            v = max(pontuacao, minimax(tabuleiro, marcador))
+            v = max(pontuacao, minimax(tabuleiro, marcador_contra))
         else:
             v = min(pontuacao, minimax(tabuleiro, marcador_contra))
             
@@ -144,8 +144,12 @@ if __name__ == "__main__":
     jogo_velha()
 
     """ tabuleiro = [["X", "X", 3],
-                [4, "O", 6],
-                [7, 8, 9]]
+                 [  4, "O", 6],
+                 [  7,   8, 9]]
     
-    v = minimax(tabuleiro, "X")
+    tabuleiro = [["X", "X", "O"],
+                 ["O", "O", "X"],
+                 ["X", "X", "O"]]
+    
+    v = minimax(tabuleiro, "O")
     print(v) """

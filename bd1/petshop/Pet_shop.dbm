@@ -1,0 +1,1076 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+ Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.9.4" use-changelog="false" last-position="0,0" last-zoom="0.5" max-obj-count="50"
+	 default-schema="public" default-owner="postgres"
+	 layers="Default layer"
+	 active-layers="0"
+	 layer-name-colors="#000000"
+	 layer-rect-colors="#b4b4b4"
+	 show-layer-names="false" show-layer-rects="false">
+<database name="petshop" is-template="false" allow-conns="true">
+</database>
+
+<schema name="public" layers="0" rect-visible="true" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<table name="distribuidor" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="703.818" y="52"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="nome_fantasia" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="razao_social" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="cnpj" not-null="true">
+		<type name="varchar" length="14"/>
+	</column>
+	<column name="data_ativacao" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<column name="data_fechamento">
+		<type name="date" length="0"/>
+	</column>
+	<column name="correio_eletronico">
+		<type name="varchar" length="80"/>
+	</column>
+	<constraint name="Distribuidor_pk" type="pk-constr" table="public.distribuidor">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="telefone" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1071.82" y="390"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="ddd" not-null="true">
+		<type name="varchar" length="10"/>
+	</column>
+	<column name="numero" not-null="true">
+		<type name="varchar" length="20"/>
+	</column>
+	<constraint name="Telefone_pk" type="pk-constr" table="public.telefone">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="distribuidor_has_telefone" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1301.82" y="66"/>
+
+	<customidxs object-type="column">
+		<object name="id_distribuidor" index="0"/>
+		<object name="id_telefone" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="distribuidor_fk" index="0"/>
+		<object name="telefone_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="Distribuidor_1_M_Telefone" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#889b11"
+	 src-table="public.distribuidor"
+	 dst-table="public.distribuidor_has_telefone"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="0" y="0"/>
+	</label>
+</relationship>
+
+<relationship name="Telefone_1_M_Distribuidor_has_Telefone" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#604496"
+	 src-table="public.telefone"
+	 dst-table="public.distribuidor_has_telefone"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="0" y="0"/>
+	</label>
+</relationship>
+
+<table name="estado" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="13.8182" y="1410"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="nome_estado" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="uf" not-null="true">
+		<type name="varchar" length="2"/>
+	</column>
+	<constraint name="Estado_pk" type="pk-constr" table="public.estado">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="cidade" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="10" y="1136"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="nome_cidade" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<constraint name="Cidade_pk" type="pk-constr" table="public.cidade">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="id_estado" index="2"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="estado_fk" index="1"/>
+	</customidxs>
+</table>
+
+<table name="bairro" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="19.8182" y="862"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="nome_bairro" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<constraint name="Bairro_pk" type="pk-constr" table="public.bairro">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="id_cidade" index="2"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="cidade_fk" index="1"/>
+	</customidxs>
+</table>
+
+<table name="endereco" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="45.8182" y="546"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="endereco" not-null="true">
+		<type name="varchar" length="80"/>
+	</column>
+	<column name="numero" not-null="true">
+		<type name="numeric" length="5"/>
+	</column>
+	<constraint name="Endereco_pk" type="pk-constr" table="public.endereco">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="id_bairro" index="3"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="bairro_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="Estado_has_many_Cidade" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#4f0ae3"
+	 src-table="public.estado"
+	 dst-table="public.cidade"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="Cidade_has_many_Bairro" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#11a3e9"
+	 src-table="public.cidade"
+	 dst-table="public.bairro"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="0" y="0"/>
+	</label>
+</relationship>
+
+<relationship name="Bairro_has_many_Endereco" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#22b7ed"
+	 src-table="public.bairro"
+	 dst-table="public.endereco"
+	 src-required="false" dst-required="false"/>
+
+<table name="distribuidor_has_endereco" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="30" y="266"/>
+
+	<customidxs object-type="column">
+		<object name="id_distribuidor" index="0"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="distribuidor_fk" index="0"/>
+	</customidxs>
+</table>
+
+<table name="regiao" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1667.82" y="262"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="nome_regiao" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="descricao">
+		<type name="varchar" length="60"/>
+	</column>
+	<column name="data_cadastro" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<constraint name="Regiao_pk" type="pk-constr" table="public.regiao">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="id_distribuidor" index="4"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="distribuidor_fk" index="1"/>
+	</customidxs>
+</table>
+
+<table name="representante" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="447.818" y="1408"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="nome" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="cpf" not-null="true">
+		<type name="varchar" length="11"/>
+	</column>
+	<column name="data_nascimento" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<column name="correio_eletronico" not-null="true">
+		<type name="varchar" length="80"/>
+	</column>
+	<constraint name="Representante_pk" type="pk-constr" table="public.representante">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="id_regiao" index="5"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="regiao_fk" index="1"/>
+		<object name="representante_uq" index="2"/>
+	</customidxs>
+</table>
+
+<table name="varejista" layers="0" collapse-mode="2" max-obj-count="9" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="2021.82" y="820"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="nome_fantasia" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="razao_social" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="cnpj" not-null="true">
+		<type name="varchar" length="14"/>
+	</column>
+	<column name="data_ativacao" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<column name="data_fechamento" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<column name="correio_eletronico">
+		<type name="varchar" length="80"/>
+	</column>
+	<constraint name="Distribuidor_pk_cp" type="pk-constr" table="public.varejista">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="id_regiao" index="7"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="regiao_fk" index="1"/>
+		<object name="varejista_uq" index="2"/>
+	</customidxs>
+</table>
+
+<relationship name="Varejista_1_1_Regiao" type="rel11" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#d53cf0"
+	 src-table="public.regiao"
+	 dst-table="public.varejista"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="0" y="0"/>
+	</label>
+</relationship>
+
+<table name="representante_has_endereco" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="453.318" y="929"/>
+
+	<customidxs object-type="column">
+		<object name="id_endereco" index="1"/>
+		<object name="id_representante" index="0"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="endereco_fk" index="1"/>
+		<object name="representante_fk" index="0"/>
+		<object name="representante_has_endereco_uq" index="2"/>
+	</customidxs>
+</table>
+
+<table name="varejista_has_endereco" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="583.364" y="371.591"/>
+
+	<customidxs object-type="column">
+		<object name="id_endereco" index="1"/>
+		<object name="id_varejista" index="0"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="endereco_fk" index="1"/>
+		<object name="varejista_fk" index="0"/>
+		<object name="varejista_has_endereco_uq" index="2"/>
+	</customidxs>
+</table>
+
+<relationship name="Representante_1_M_Representante_has_Endereco" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#948155"
+	 src-table="public.representante"
+	 dst-table="public.representante_has_endereco"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="0" y="0"/>
+	</label>
+</relationship>
+
+<relationship name="Varejista_1_M_Varejista_has_Endereco" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#e2c0d9"
+	 src-table="public.varejista"
+	 dst-table="public.varejista_has_endereco"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="0" y="0"/>
+	</label>
+</relationship>
+
+<table name="varejista_has_telefone" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1617.82" y="600"/>
+
+	<customidxs object-type="column">
+		<object name="id_telefone" index="1"/>
+		<object name="id_varejista" index="0"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="telefone_fk" index="1"/>
+		<object name="varejista_fk" index="0"/>
+	</customidxs>
+</table>
+
+<relationship name="Varejista_1_M_Varejista_has_Telefone" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#a659f1"
+	 src-table="public.varejista"
+	 dst-table="public.varejista_has_telefone"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="0" y="0"/>
+	</label>
+</relationship>
+
+<relationship name="Telefone_1_M_Varejista_has_Telefone" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#253789"
+	 src-table="public.telefone"
+	 dst-table="public.varejista_has_telefone"
+	 src-required="false" dst-required="false"/>
+
+<table name="representante_has_telefone" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="577.318" y="680"/>
+
+	<customidxs object-type="column">
+		<object name="id_representante" index="0"/>
+		<object name="id_telefone" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="representante_fk" index="0"/>
+		<object name="telefone_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="Representante_1_M_Representante_has_Telefone" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#f062ec"
+	 src-table="public.representante"
+	 dst-table="public.representante_has_telefone"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="0" y="0"/>
+	</label>
+</relationship>
+
+<relationship name="Telefone_1_M_Representante_has_Telefone" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#307040"
+	 src-table="public.telefone"
+	 dst-table="public.representante_has_telefone"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="Distribuidor_1_M_Regiao" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#91c59f"
+	 src-table="public.distribuidor"
+	 dst-table="public.regiao"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="Representante_1_1_Regiao" type="rel11" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#2fadb3"
+	 src-table="public.regiao"
+	 dst-table="public.representante"
+	 src-required="false" dst-required="false"/>
+
+<table name="pedido" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="926.82" y="1609.5"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="data_pedido" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<constraint name="Pedido_pk" type="pk-constr" table="public.pedido">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="item" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1408.14" y="1454.32"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="valor" not-null="true">
+		<type name="money" length="0"/>
+	</column>
+	<column name="quantidade" not-null="true">
+		<type name="numeric" length="4"/>
+	</column>
+	<constraint name="Item_pk" type="pk-constr" table="public.item">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="id_raca" index="3"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="raca_fk" index="1"/>
+	</customidxs>
+</table>
+
+<table name="alimento" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="2617.82" y="1497"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="nome_alimento" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="idade_maxima" not-null="true">
+		<type name="numeric" length="2"/>
+	</column>
+	<column name="unidade_idade" not-null="true">
+		<type name="varchar" length="20"/>
+	</column>
+	<column name="descricao" not-null="true">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="quantidade_diaria" not-null="true">
+		<type name="numeric" length="2"/>
+	</column>
+	<constraint name="Alimento_pk" type="pk-constr" table="public.alimento">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="classe_animal" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="2141.82" y="60"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="nome" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="descricao" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<constraint name="Classe_Animal_pk" type="pk-constr" table="public.classe_animal">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="id_distribuidor" index="3"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="distribuidor_fk" index="1"/>
+	</customidxs>
+</table>
+
+<table name="raca" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="2601.14" y="888.182"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="nome_raca" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="cor_caracteristica" not-null="true">
+		<type name="varchar" length="20"/>
+	</column>
+	<column name="comprimento_medio" not-null="true">
+		<type name="numeric" length="3"/>
+	</column>
+	<column name="altura_media" not-null="true">
+		<type name="numeric" length="3"/>
+	</column>
+	<column name="peso_medio" not-null="true">
+		<type name="numeric" length="4"/>
+	</column>
+	<constraint name="Raca_pk" type="pk-constr" table="public.raca">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="id_classe_animal" index="6"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="classe_animal_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="Distribuidor_1_M_Classe_Animal" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#9d8f72"
+	 src-table="public.distribuidor"
+	 dst-table="public.classe_animal"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="Classe_Animal_has_many_Raca" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#bbd41b"
+	 src-table="public.classe_animal"
+	 dst-table="public.raca"
+	 src-required="false" dst-required="false"/>
+
+<table name="doenca" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="2081.82" y="400"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="nome" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="descricao" not-null="true">
+		<type name="varchar" length="100"/>
+	</column>
+	<constraint name="Doenca_pk" type="pk-constr" table="public.doenca">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="id_raca" index="3"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="raca_fk" index="1"/>
+	</customidxs>
+</table>
+
+<table name="vacina" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="2601.82" y="360"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="nome" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="descricao" not-null="true">
+		<type name="varchar" length="100"/>
+	</column>
+	<constraint name="Vacina_pk" type="pk-constr" table="public.vacina">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="id_raca" index="3"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="raca_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="Raca_has_many_Vacina" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#4b4c45"
+	 src-table="public.raca"
+	 dst-table="public.vacina"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="Raca_has_many_Doenca" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#f8ae4f"
+	 src-table="public.raca"
+	 dst-table="public.doenca"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="Varejista_has_Endereco_has_one_Endereco" type="rel11" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#9c8ffe"
+	 src-table="public.endereco"
+	 dst-table="public.varejista_has_endereco"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="Representante_has_Endereco_has_one_Endereco" type="rel11" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#a8a710"
+	 src-table="public.endereco"
+	 dst-table="public.representante_has_endereco"
+	 src-required="false" dst-required="false"/>
+
+<table name="pedido_has_item" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1081.95" y="1840.66"/>
+
+	<customidxs object-type="column">
+		<object name="id_item" index="0"/>
+		<object name="id_pedido" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="item_fk" index="0"/>
+		<object name="pedido_fk" index="2"/>
+		<object name="pedido_has_item_uq" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="pedido_has_item_has_one_item" type="rel11" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#6cf4b3"
+	 src-table="public.item"
+	 dst-table="public.pedido_has_item"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="pedido_has_many_pedido_has_item" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#6cc5c1"
+	 src-table="public.pedido"
+	 dst-table="public.pedido_has_item"
+	 src-required="false" dst-required="false"/>
+
+<table name="nota_fiscal" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="2118.36" y="1858.62"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="data_venda" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<constraint name="nota_fiscal_pk" type="pk-constr" table="public.nota_fiscal">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="id_tipo_pagamento" index="2"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="tipo_pagamento_fk" index="1"/>
+	</customidxs>
+</table>
+
+<table name="nf_has_item" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1606.98" y="1705.9"/>
+</table>
+
+<relationship name="nf_has_many_nf_has_item" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#346ccd"
+	 src-table="public.nota_fiscal"
+	 dst-table="public.nf_has_item"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="nf_has_item_has_one_item" type="rel11" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#467bf3"
+	 src-table="public.item"
+	 dst-table="public.nf_has_item"
+	 src-required="false" dst-required="false"/>
+
+<table name="cliente" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="2304.31" y="1279.43"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="nome" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="cpf" not-null="true">
+		<type name="varchar" length="11"/>
+	</column>
+	<constraint name="cliente_pk" type="pk-constr" table="public.cliente">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="cliente_has_endereco" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1463.86" y="952.955"/>
+</table>
+
+<relationship name="cliente_has_many_cliente_has_endereco" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#200e8b"
+	 src-table="public.cliente"
+	 dst-table="public.cliente_has_endereco"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="cliente_has_endereco_has_one_endereco" type="rel11" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#72acfb"
+	 src-table="public.endereco"
+	 dst-table="public.cliente_has_endereco"
+	 src-required="false" dst-required="false"/>
+
+<table name="cliente_has_telefone" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1074.55" y="1030.91"/>
+
+	<customidxs object-type="column">
+		<object name="id_cliente" index="0"/>
+		<object name="id_telefone" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="cliente_fk" index="0"/>
+		<object name="telefone_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="cliente_has_many_cliente_has_telefone" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#2f90af"
+	 src-table="public.cliente"
+	 dst-table="public.cliente_has_telefone"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="telefone_has_many_cliente_has_telefone" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#f82b21"
+	 src-table="public.telefone"
+	 dst-table="public.cliente_has_telefone"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="raca_has_many_item" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#488600"
+	 src-table="public.raca"
+	 dst-table="public.item"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="distribuidor_has_many_distribuidor_has_endereco" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#2c32b6"
+	 src-table="public.distribuidor"
+	 dst-table="public.distribuidor_has_endereco"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="distribuidor_has_endereco_has_one_endereco" type="rel11" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#94eb61"
+	 src-table="public.endereco"
+	 dst-table="public.distribuidor_has_endereco"
+	 src-required="false" dst-required="false"/>
+
+<table name="tipo_pagamento" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1482" y="1898"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="tipo_pagamento">
+		<type name="varchar" length="20"/>
+	</column>
+	<constraint name="tipo_pagamento_pk" type="pk-constr" table="public.tipo_pagamento">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="tipo_pagamento_has_many_nota_fiscal" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#a09ea5"
+	 src-table="public.tipo_pagamento"
+	 dst-table="public.nota_fiscal"
+	 src-required="false" dst-required="false"/>
+
+<table name="raca_alimento" layers="0" collapse-mode="2" pagination="true" attribs-page="0" ext-attribs-page="0" max-obj-count="2" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="2678" y="1278"/>
+</table>
+
+<relationship name="raca_has_many_raca_alimento" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#5e48bc"
+	 src-table="public.raca"
+	 dst-table="public.raca_alimento"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="alimento_has_many_raca_alimento" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#714b37"
+	 src-table="public.alimento"
+	 dst-table="public.raca_alimento"
+	 src-required="false" dst-required="false"/>
+
+<table name="representante_pedido" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="430" y="1782"/>
+</table>
+
+<relationship name="representante_has_many_representante_pedido" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#231ac8"
+	 src-table="public.representante"
+	 dst-table="public.representante_pedido"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="representante_pedido_has_one_pedido" type="rel11" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#bdcd12"
+	 src-table="public.pedido"
+	 dst-table="public.representante_pedido"
+	 src-required="false" dst-required="false"/>
+
+<table name="varejista_pedido" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="938" y="1316"/>
+</table>
+
+<relationship name="varejista_has_many_varejista_pedido" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#e260d3"
+	 src-table="public.varejista"
+	 dst-table="public.varejista_pedido"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="varejista_pedido_has_one_pedido" type="rel11" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#d9f454"
+	 src-table="public.pedido"
+	 dst-table="public.varejista_pedido"
+	 src-required="false" dst-required="false"/>
+
+<table name="varejista_nf" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1884" y="1528"/>
+</table>
+
+<relationship name="varejista_has_many_varejista_nf" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#e5ff14"
+	 src-table="public.varejista"
+	 dst-table="public.varejista_nf"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="varejista_nf_has_one_nota_fiscal" type="rel11" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#d8a576"
+	 src-table="public.nota_fiscal"
+	 dst-table="public.varejista_nf"
+	 src-required="false" dst-required="false"/>
+
+<table name="cliente_nf" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="2280" y="1580"/>
+</table>
+
+<relationship name="cliente_has_many_cliente_nf" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#edd57d"
+	 src-table="public.cliente"
+	 dst-table="public.cliente_nf"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="cliente_nf_has_one_nota_fiscal" type="rel11" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#5fe44f"
+	 src-table="public.nota_fiscal"
+	 dst-table="public.cliente_nf"
+	 src-required="false" dst-required="false"/>
+
+</dbmodel>
